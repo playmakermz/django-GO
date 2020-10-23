@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from .models import *
 
 def home(request):
@@ -7,6 +7,7 @@ def home(request):
     if request.method == 'POST':
         form = Note(title=request.POST['title'])
         form.save()
+        return redierct('/')
 
     main = {
         'note':note,
@@ -17,12 +18,12 @@ def home(request):
 def update(request, pk):
     from .models import Note
     note = Note.objects.get(id=pk)
-    print('ini untuk',Note.title)
+
     if request.method == 'POST':
-        print('ini pk:',note.title)
         form = request.POST['title']
         note.title = form
         note.save()
+        return redirect ('/')
 
     main = {
         'note':note,
@@ -34,6 +35,7 @@ def delete(request, pk):
     note = Note.objects.get(id=pk)
     if request.method == 'POST':
         note.delete()
+        return redirect('/')
 
     main = {
         'note':note,
