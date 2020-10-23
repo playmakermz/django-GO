@@ -7,7 +7,7 @@ def home(request):
     if request.method == 'POST':
         form = Note(title=request.POST['title'])
         form.save()
-        return redierct('/')
+        return redirect('/')
 
     main = {
         'note':note,
