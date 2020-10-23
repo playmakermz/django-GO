@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <form action="" method="post">
+        {% csrf_token %}
+	 <input type="text" required id="id_title" name="title" placeholder="insert text">
+        <input type="submit" value="add-item">
+    </form>
+
+    {% for Note in note  %}
+    {{ Note.title }}
+    <a href="{% url 'update' Note.id %}">update</a>
+    <a href="{% url 'delete' Note.id %}">delete</a>
+    <br>
+    {% endfor %}
+</body>
+
+</html>
